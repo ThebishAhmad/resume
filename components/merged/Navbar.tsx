@@ -2,44 +2,42 @@
 
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollSmoother from "gsap/ScrollSmoother";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import "./styles/Navbar.css";
+
+gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 
 // @ts-ignore
 export let smoother: any;
 
 const Navbar = () => {
   useEffect(() => {
-    import("gsap-trial/ScrollSmoother").then((plugin) => {
-      const ScrollSmoother = plugin.ScrollSmoother;
-      gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+    smoother = ScrollSmoother.create({
+      wrapper: "#smooth-wrapper",
+      content: "#smooth-content",
+      smooth: 1.7,
+      speed: 1.7,
+      effects: true,
+      autoResize: true,
+      ignoreMobileResize: true,
+    });
 
-      smoother = ScrollSmoother.create({
-        wrapper: "#smooth-wrapper",
-        content: "#smooth-content",
-        smooth: 1.7,
-        speed: 1.7,
-        effects: true,
-        autoResize: true,
-        ignoreMobileResize: true,
-      });
+    smoother.scrollTop(0);
+    // Smoother is not paused here to avoid lock-up issues; initialFX handles intro animations if needed.
 
-      smoother.scrollTop(0);
-      // Smoother is not paused here to avoid lock-up issues; initialFX handles intro animations if needed.
-
-      let links = document.querySelectorAll(".header a[data-href]");
-      links.forEach((elem) => {
-        let element = elem as HTMLAnchorElement;
-        element.addEventListener("click", (e) => {
-          if (window.innerWidth > 1024) {
-            e.preventDefault();
-            let elem = e.currentTarget as HTMLAnchorElement;
-            let section = elem.getAttribute("data-href");
-            // Use "center center" to center the section in the viewport
-            smoother && smoother.scrollTo(section, true, "center center");
-          }
-        });
+    let links = document.querySelectorAll(".header a[data-href]");
+    links.forEach((elem) => {
+      let element = elem as HTMLAnchorElement;
+      element.addEventListener("click", (e) => {
+        if (window.innerWidth > 1024) {
+          e.preventDefault();
+          let elem = e.currentTarget as HTMLAnchorElement;
+          let section = elem.getAttribute("data-href");
+          // Use "center center" to center the section in the viewport
+          smoother && smoother.scrollTo(section, true, "center center");
+        }
       });
     });
 

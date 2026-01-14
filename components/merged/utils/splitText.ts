@@ -1,14 +1,15 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
 interface ParaElement extends HTMLElement {
   anim?: gsap.core.Animation;
   split?: any;
 }
 
 export default async function setSplitText() {
-  // @ts-ignore
-  const { SplitText } = await import("gsap-trial/SplitText");
-  gsap.registerPlugin(ScrollTrigger, SplitText);
 
   ScrollTrigger.config({ ignoreMobileResize: true });
   if (window.innerWidth < 900) return;
