@@ -1,0 +1,109 @@
+.sticky-scroll-container {
+    height: 30rem;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    /* Custom scrollbar hiding */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    /* Added visibility styles */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.sticky-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+.sticky-scroll-content {
+    display: flex;
+    align-items: flex-start;
+    padding-right: 5rem;
+    /* Gap between text and image */
+    width: 50%;
+}
+
+.sticky-scroll-text-wrapper {
+    max-width: 42rem;
+}
+
+.sticky-scroll-card {
+    margin-bottom: 5rem;
+    /* Space between text blocks */
+    margin-top: 5rem;
+}
+
+.sticky-scroll-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.sticky-scroll-description {
+    font-size: 1.25rem;
+    color: #a1a1aa;
+    /* slate-500 */
+    line-height: 1.6;
+    max-width: 32rem;
+}
+
+.sticky-scroll-image-wrapper {
+    display: none;
+    /* Hidden on mobile by default, handled by mobile-content */
+    height: 20rem;
+    width: 30rem;
+    border-radius: 1rem;
+    position: sticky;
+    top: 5rem;
+    overflow: hidden;
+    padding: 3px;
+    /* For border effect */
+    background: transparent;
+}
+
+.sticky-scroll-mobile-content {
+    display: block;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+/* Image styling within the wrapper */
+.sticky-scroll-image-wrapper img,
+.sticky-scroll-mobile-content img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background-color: #1a1a1a;
+}
+
+/* Desktop Styles */
+@media (min-width: 1024px) {
+    .sticky-scroll-image-wrapper {
+        display: block;
+    }
+
+    .sticky-scroll-mobile-content {
+        display: none;
+    }
+}
+
+/* Variables matching JS gradients for fallback */
+:root {
+    --cyan-500: #06b6d4;
+    --emerald-500: #10b981;
+    --pink-500: #ec4899;
+    --indigo-500: #6366f1;
+    --orange-500: #f97316;
+    --yellow-500: #eab308;
+    --white: #ffffff;
+    --slate-500: #64748b;
+}

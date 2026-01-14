@@ -1,0 +1,78 @@
+.tilted-card-figure {
+    perspective: 1000px;
+    /* Essential for 3D effect */
+    position: relative;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.tilted-card-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    /* Deep shadow */
+    background: #1a1a1a;
+}
+
+.tilted-card-image {
+    object-fit: cover;
+    display: block;
+}
+
+.tilted-card-glare {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+.tilted-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    border-radius: inherit;
+    /* Add any specific styling for overlay content here if not handled by children */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.tilted-card-caption {
+    pointer-events: none;
+    position: absolute;
+    top: 50%;
+    /* Center relative to image or adjust as needed */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.95);
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    white-space: nowrap;
+}
+
+.mobile-warning {
+    position: absolute;
+    top: -2rem;
+    color: white;
+    font-size: 0.8rem;
+}

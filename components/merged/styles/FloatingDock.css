@@ -1,0 +1,150 @@
+.floating-dock-desktop {
+    display: none;
+    margin: 0 auto;
+    width: max-content;
+    height: 3.5rem;
+    /* 14 * 0.25rem = 3.5rem (approx h-14) */
+    gap: 1rem;
+    /* gap-4 */
+    align-items: flex-end;
+    border-radius: 2rem;
+    /* rounded-2xl */
+    background: rgba(23, 23, 23, 0.5);
+    /* neutral-900/50 */
+    backdrop-filter: blur(10px);
+    /* backdrop-blur-md */
+    padding-bottom: 0.75rem;
+    /* pb-3 */
+    padding-left: 1rem;
+    /* px-4 */
+    padding-right: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+}
+
+@media (min-width: 768px) {
+    .floating-dock-desktop {
+        display: flex;
+    }
+}
+
+.dock-icon-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.dock-icon {
+    display: flex;
+    aspect-ratio: 1 / 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    /* rounded-full */
+    background: #262626;
+    /* neutral-800 */
+}
+
+.dock-icon-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e5e5e5;
+    /* neutral-200 */
+    width: 60%;
+    /* Icon size relative to bubble */
+    height: 60%;
+}
+
+.dock-tooltip {
+    position: absolute;
+    left: 50%;
+    top: -2.5rem;
+    /* -top-10 roughly */
+    width: max-content;
+    border-radius: 0.5rem;
+    /* rounded-md */
+    background: #171717;
+    /* neutral-900 */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 0.75rem;
+    /* text-xs */
+    padding: 0.5rem 0.75rem;
+    /* py-2 px-3 */
+    pointer-events: none;
+    /* Pointer events none on tooltip */
+}
+
+.floating-dock-mobile {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    /* bottom-4 right-4 */
+    display: block;
+    z-index: 50;
+}
+
+@media (min-width: 768px) {
+    .floating-dock-mobile {
+        display: none;
+    }
+}
+
+.mobile-dock-trigger {
+    height: 3.5rem;
+    /* h-14 */
+    width: 3.5rem;
+    /* w-14 */
+    border-radius: 9999px;
+    background: #171717;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.mobile-dock-expanded {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 0.5rem;
+    /* mb-2 */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* gap-2 */
+}
+
+.mobile-dock-item {
+    height: 3rem;
+    /* h-12 */
+    width: 3rem;
+    /* w-12 */
+    border-radius: 9999px;
+    background: #171717;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.mobile-dock-icon {
+    height: 1.5rem;
+    /* h-6 */
+    width: 1.5rem;
+    /* w-6 */
+    color: #e5e5e5;
+}
+
+/* Optional: Hide mobile dock title or show it to side - kept simple for now */
+.mobile-dock-title {
+    display: none;
+    /* Hidden by default to keep bubble look */
+}

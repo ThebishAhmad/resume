@@ -1,0 +1,101 @@
+.header {
+  display: flex;
+  max-width: fit-content;
+  width: auto;
+  justify-content: space-between;
+  padding: 12px 30px;
+  box-sizing: border-box;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20px;
+  z-index: 9999;
+
+  /* Glassmorphism & Floating Styles */
+  background: rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 100px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  gap: 40px;
+  align-items: center;
+}
+
+.header ul {
+  font-size: 13px;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  column-gap: 25px;
+  row-gap: 8px;
+  align-items: center;
+}
+
+.header ul li {
+  margin-left: 0px;
+  letter-spacing: 0.5px;
+  color: #ccc;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.header ul li:hover {
+  color: #fff;
+}
+
+.navbar-connect {
+  position: relative;
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+
+.navbar-connect:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.navbar-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-svg {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo-svg:hover {
+  transform: rotate(180deg) scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+@media only screen and (min-width: 500px) {
+
+  /* Adjusted for new design, allowing scale but keeping pill shape */
+  .header ul {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .header ul {
+    column-gap: 50px;
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,21 @@
+.work-section-sticky {
+  padding: 50px 0 100px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  color: white;
+  /* Adjust for your layout's background */
+}
+
+.work-sticky-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 0 5%;
+}
+
+.work-sticky-title span {
+  color: #888;
+  font-weight: 300;
+}

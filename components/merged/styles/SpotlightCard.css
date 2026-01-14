@@ -1,0 +1,29 @@
+.spotlight-card {
+    position: relative;
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.03);
+    /* Extremely subtle glass */
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.spotlight-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.spotlight-overlay {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.5s;
+    z-index: 1;
+    /* Highlight sits above background but below content */
+}
+
+.spotlight-content {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+}

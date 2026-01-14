@@ -1,0 +1,41 @@
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Tabish Portfolio Clone",
+  description: "Front-end developer portfolio",
+  icons: {
+    icon: "/favicon.svg",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className="dark">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased selection:bg-blue-500/30`}
+      >
+        <div className="relative min-h-screen">
+          <main className="relative z-10 w-full h-full">
+            {children}
+          </main>
+        </div>
+      </body>
+    </html>
+  );
+}

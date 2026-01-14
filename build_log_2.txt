@@ -1,0 +1,28 @@
+
+> portfolio-clone@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\hpp\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\hpp\Desktop\Goding\Portfolio\package-lock.json
+
+▲ Next.js 16.1.1 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 33.2s
+  Running TypeScript ...
+Failed to compile.
+
+./components/merged/utils/initialFX.ts:1:27
+Type error: Could not find a declaration file for module 'gsap-trial/SplitText'. 'C:/Users/hpp/Desktop/Goding/Portfolio/node_modules/gsap-trial/SplitText.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/gsap-trial` if it exists or add a new declaration (.d.ts) file containing `declare module 'gsap-trial/SplitText';`
+
+[0m[31m[1m>[22m[39m[90m 1 |[39m [36mimport[39m { [33mSplitText[39m } [36mfrom[39m [32m"gsap-trial/SplitText"[39m[33m;[39m
+ [90m   |[39m                           [31m[1m^[22m[39m
+ [90m 2 |[39m [36mimport[39m gsap [36mfrom[39m [32m"gsap"[39m[33m;[39m
+ [90m 3 |[39m [36mimport[39m { smoother } [36mfrom[39m [32m"../Navbar"[39m[33m;[39m
+ [90m 4 |[39m[0m
+Next.js build worker exited with code: 1 and signal: null

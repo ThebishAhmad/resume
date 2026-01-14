@@ -1,0 +1,134 @@
+/* Tech Marquee Styles */
+.tech-marquee-section {
+    padding: 100px 0;
+    overflow: hidden;
+    position: relative;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.tech-heading {
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+.tech-heading span {
+    color: #8c8c8c;
+    font-weight: 300;
+}
+
+.marquee-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+    position: relative;
+}
+
+/* Row Wrapper */
+.marquee-row {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    /* Mask for fade effect on edges */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-content {
+    display: flex;
+    gap: 30px;
+    width: max-content;
+    animation: scroll var(--duration) linear infinite;
+    animation-direction: var(--direction);
+}
+
+/* Individual Card */
+.tech-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    padding: 15px 30px;
+    border-radius: 50px;
+    /* Pill shape */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 180px;
+    justify-content: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+.tech-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+/* Pause animation on hover */
+.marquee-row:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+.tech-icon-placeholder {
+    width: 30px;
+    height: 30px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.tech-name {
+    color: #ddd;
+    font-size: 1.1rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+        /* Move half the doubled width */
+    }
+}
+
+@media (max-width: 768px) {
+    .tech-heading {
+        font-size: 2.5rem;
+    }
+
+    .tech-card {
+        padding: 10px 20px;
+        min-width: 140px;
+    }
+
+    .tech-name {
+        font-size: 0.9rem;
+    }
+
+    .marquee-container {
+        gap: 25px;
+    }
+}

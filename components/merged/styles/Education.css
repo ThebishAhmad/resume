@@ -1,0 +1,115 @@
+.education-section {
+    padding: 100px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    color: white;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.section-title span {
+    color: #888;
+    font-weight: 300;
+}
+
+.por-title {
+    margin-top: 100px;
+}
+
+/* Bento Grid for Education */
+.bento-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 1024px) {
+    .bento-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bento-item {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.main-edu {
+    min-height: 250px;
+}
+
+.edu-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.edu-content h3 {
+    font-size: 1.8rem;
+    margin: 5px 0;
+    background: linear-gradient(to right, #fff, #bbb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.degree,
+.location {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.desc {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* POR Grid */
+.por-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.por-card {
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.por-icon {
+    font-size: 2.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.por-details h3 {
+    font-size: 1.4rem;
+    color: #fff;
+    margin: 0;
+}
+
+.por-details p {
+    color: #999;
+    margin: 5px 0 0 0;
+    font-size: 1rem;
+}
