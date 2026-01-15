@@ -1,86 +1,58 @@
 "use client";
 
-import { useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef } from "react";
 import "./styles/Cursor.css";
+import gsap from "gsap";
+
+
 
 const Cursor = () => {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-
+  const cursorRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const manageMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      mouseX.set(clientX);
-      mouseY.set(clientY);
-    };
-
-    window.addEventListener("mousemove", manageMouseMove);
-
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const cursorElement = document.querySelector('.cursor-main') as HTMLElement;
-      if (!cursorElement) return;
-
-      if (target.closest('[data-cursor="disable"]')) {
-        cursorElement.classList.add('cursor-disable');
-      } else {
-        cursorElement.classList.remove('cursor-disable');
+    let hover = false;
+    const cursor = cursorRef.current!;
+    const mousePos = { x: 0, y: 0 };
+    const cursorPos = { x: 0, y: 0 };
+    document.addEventListener("mousemove", (e) => {
+      mousePos.x = e.clientX;
+      mousePos.y = e.clientY;
+    });
+    requestAnimationFrame(function loop() {
+      if (!hover) {
+        const delay = 6;
+        cursorPos.x += (mousePos.x - cursorPos.x) / delay;
+        cursorPos.y += (mousePos.y - cursorPos.y) / delay;
+        gsap.to(cursor, { x: cursorPos.x, y: cursorPos.y, duration: 0.1 });
+        // cursor.style.transform = `translate(${cursorPos.x}px, ${cursorPos.y}px)`;
       }
-
-      // Icon logic or complex cursor logic can be re-added if needed
-      // For now, keeping it simple as per original simplified logic
-    };
-
-    // Note: The original generic selector logic was aggressive. 
-    // Simplified to global listener for performance, but can attach specific listeners if needed.
-    // Preserving the original behavior layout:
-
+      requestAnimationFrame(loop);
+    });
     document.querySelectorAll("[data-cursor]").forEach((item) => {
       const element = item as HTMLElement;
       element.addEventListener("mouseover", (e: MouseEvent) => {
         const target = e.currentTarget as HTMLElement;
         const rect = target.getBoundingClientRect();
-        const cursor = document.querySelector('.cursor-main') as HTMLElement;
 
-        if (element.dataset.cursor === "icons" && cursor) {
+        if (element.dataset.cursor === "icons") {
           cursor.classList.add("cursor-icons");
-          // For icons, we might want to snap to the element. 
-          // GSAP was doing: gsap.to(cursor, { x: rect.left, y: rect.top... })
-          // With useSpring, we can just set mouseX/Y to rect center/corner if we want snapping.
-          // For now, let's keep the fluid follow.
+
+          gsap.to(cursor, { x: rect.left, y: rect.top, duration: 0.1 });
+          //   cursor.style.transform = `translate(${rect.left}px,${rect.top}px)`;
           cursor.style.setProperty("--cursorH", `${rect.height}px`);
+          hover = true;
         }
-        if (element.dataset.cursor === "disable" && cursor) {
+        if (element.dataset.cursor === "disable") {
           cursor.classList.add("cursor-disable");
         }
       });
       element.addEventListener("mouseout", () => {
-        const cursor = document.querySelector('.cursor-main') as HTMLElement;
-        if (cursor) cursor.classList.remove("cursor-disable", "cursor-icons");
+        cursor.classList.remove("cursor-disable", "cursor-icons");
+        hover = false;
       });
     });
+  }, []);
 
-    return () => {
-      window.removeEventListener("mousemove", manageMouseMove);
-    };
-  }, [mouseX, mouseY]);
-
-  return (
-    <motion.div
-      className="cursor-main"
-      style={{
-        left: smoothX,
-        top: smoothY,
-        x: "-50%",
-        y: "-50%"
-      }}
-    />
-  );
+  return <div className="cursor-main" ref={cursorRef}></div>;
 };
 
 export default Cursor;

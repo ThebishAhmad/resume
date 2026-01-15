@@ -1,20 +1,33 @@
 "use client";
 
 import { useEffect } from "react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollSmoother from "gsap/ScrollSmoother";
 import HoverLinks from "./HoverLinks";
-import Lenis from "lenis";
+import { gsap } from "gsap";
 import "./styles/Navbar.css";
 
-export const Navbar = () => {
+gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+
+
+
+// @ts-ignore
+export let smoother: any;
+
+const Navbar = () => {
   useEffect(() => {
-    const lenis = new Lenis();
+    smoother = ScrollSmoother.create({
+      wrapper: "#smooth-wrapper",
+      content: "#smooth-content",
+      smooth: 1.7,
+      speed: 1.7,
+      effects: true,
+      autoResize: true,
+      ignoreMobileResize: true,
+    });
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
+    smoother.scrollTop(0);
+    // Smoother is not paused here to avoid lock-up issues; initialFX handles intro animations if needed.
 
     let links = document.querySelectorAll(".header a[data-href]");
     links.forEach((elem) => {
@@ -24,19 +37,21 @@ export const Navbar = () => {
           e.preventDefault();
           let elem = e.currentTarget as HTMLAnchorElement;
           let section = elem.getAttribute("data-href");
-
-          if (section) {
-            const target = document.querySelector(section) as HTMLElement;
-            if (target) {
-              lenis.scrollTo(target);
-            }
-          }
+          // Use "center center" to center the section in the viewport
+          smoother && smoother.scrollTo(section, true, "center center");
         }
       });
     });
 
+    const resizeHandler = () => {
+      // @ts-ignore
+      if (typeof ScrollSmoother !== 'undefined') ScrollSmoother.refresh(true);
+    };
+    window.addEventListener("resize", resizeHandler);
+
     return () => {
-      lenis.destroy();
+      window.removeEventListener("resize", resizeHandler);
+      if (smoother) smoother.kill();
     };
   }, []);
   return (

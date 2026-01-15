@@ -12,7 +12,7 @@ import Landing from "./Landing";
 import Navbar from "./Navbar";
 import SocialIcons from "./SocialIcons";
 import Work from "./Work";
-
+import setSplitText from "./utils/splitText";
 
 const TechMarquee = dynamic(() => import("./TechMarquee"), { ssr: false });
 
@@ -23,8 +23,10 @@ const MainContainer = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     setIsDesktopView(window.innerWidth > 1024);
     const resizeHandler = () => {
+      setSplitText();
       setIsDesktopView(window.innerWidth > 1024);
     };
+    resizeHandler();
     window.addEventListener("resize", resizeHandler);
     return () => {
       window.removeEventListener("resize", resizeHandler);
