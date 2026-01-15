@@ -1,11 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactStrictMode: true,
-  experimental: {
-    // @ts-ignore
-    turbo: false,
+  output: "export",
+  images: {
+    unoptimized: true,
   },
+  reactStrictMode: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },

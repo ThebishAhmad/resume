@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 // Remove static import
-// import ScrollSmoother from "gsap/ScrollSmoother";
+// const ScrollSmoother = (await import("gsap/ScrollSmoother")).default;
 import HoverLinks from "./HoverLinks";
 import gsap from "gsap";
 import "./styles/Navbar.css";
@@ -22,10 +22,11 @@ const Navbar = () => {
   useEffect(() => {
     (async () => {
       try {
-        // @ts-ignore
-        const ScrollSmoother = (await import("gsap/ScrollSmoother")).default;
-        gsap.registerPlugin(ScrollSmoother);
+        // ScrollSmoother is not available in free gsap@3.12.5 package
+        // const ScrollSmoother = (await import("gsap/ScrollSmoother")).default;
+        // gsap.registerPlugin(ScrollSmoother);
 
+        /* 
         smoother = ScrollSmoother.create({
           wrapper: "#smooth-wrapper",
           content: "#smooth-content",
@@ -35,8 +36,9 @@ const Navbar = () => {
           autoResize: true,
           ignoreMobileResize: true,
         });
+        */
 
-        smoother.scrollTop(0);
+        // smoother.scrollTop(0);
 
         // Refilling link listeners after smoother is ready
         let links = document.querySelectorAll(".header a[data-href]");
@@ -47,7 +49,7 @@ const Navbar = () => {
               e.preventDefault();
               let elem = e.currentTarget as HTMLAnchorElement;
               let section = elem.getAttribute("data-href");
-              smoother && smoother.scrollTo(section, true, "center center");
+              // smoother && smoother.scrollTo(section, true, "center center");
             }
           });
         });

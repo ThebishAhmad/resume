@@ -1,8 +1,9 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
+// import { SplitText } from "gsap/SplitText";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+// @ts-ignore
+gsap.registerPlugin(ScrollTrigger);
 
 interface ParaElement extends HTMLElement {
   anim?: gsap.core.Animation;
@@ -26,11 +27,14 @@ export default async function setSplitText() {
       para.split?.revert();
     }
 
+    /* 
     para.split = new SplitText(para, {
       type: "lines,words",
       linesClass: "split-line",
     });
+    */
 
+    /*
     para.anim = gsap.fromTo(
       para.split.words,
       { autoAlpha: 0, y: 80 },
@@ -47,16 +51,20 @@ export default async function setSplitText() {
         stagger: 0.02,
       }
     );
+    */
   });
   titles.forEach((title: ParaElement) => {
     if (title.anim) {
       title.anim.progress(1).kill();
       title.split?.revert();
     }
+    /* 
     title.split = new SplitText(title, {
       type: "chars,lines",
       linesClass: "split-line",
     });
+    */
+    /*
     title.anim = gsap.fromTo(
       title.split.chars,
       { autoAlpha: 0, y: 80, rotate: 10 },
@@ -74,6 +82,7 @@ export default async function setSplitText() {
         stagger: 0.03,
       }
     );
+    */
   });
 
   ScrollTrigger.addEventListener("refresh", () => {
