@@ -1,12 +1,8 @@
 "use client";
-import React, { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import "./styles/HorizontalWork.css";
-
-
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface WorkItem {
     title: string;
@@ -15,60 +11,38 @@ interface WorkItem {
 }
 
 export const HorizontalScrollWork = ({ content }: { content: WorkItem[] }) => {
-    const sectionRef = useRef<HTMLDivElement>(null);
-    const triggerRef = useRef<HTMLDivElement>(null);
+    const targetRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: targetRef,
+    });
 
-    useEffect(() => {
-        const section = sectionRef.current;
-        const trigger = triggerRef.current;
-
-        if (!section || !trigger) return;
-
-        // Calculate total width of all cards plus gaps
-        // We can assume each card is e.g., 80vw or fixed width.
-        // Let's rely on scrollWidth for dynamic sizing.
-
-        let ctx = gsap.context(() => {
-            gsap.to(section, {
-                x: () => {
-                    const scrollWidth = section.scrollWidth;
-                    const windowWidth = window.innerWidth;
-                    // Increase buffer significantly to ensure last card is fully visible
-                    // Make it responsive: ensure we scroll enough to show the end plus some padding
-                    return -(scrollWidth - windowWidth + 500);
-                },
-                ease: "none",
-                scrollTrigger: {
-                    trigger: trigger,
-                    pin: true,
-                    scrub: 1,
-                    // Adjust end based on scroll width for natural feel
-                    end: () => "+=" + (section.scrollWidth),
-                    invalidateOnRefresh: true,
-                }
-            });
-        }, triggerRef);
-
-        return () => ctx.revert();
-    }, [content]);
+    // Map vertical scroll progress to horizontal movement.
+    // "1%" to "-95%" is a safe heuristic for a standard list of items. 
+    // For precise width, we'd need to measure refs, but this is usually sufficient and responsive.
+    const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
 
     return (
-        <div className="h-scroll-outer" ref={triggerRef}>
-            <div className="h-scroll-inner" ref={sectionRef}>
-                {content.map((item, index) => (
-                    <div key={index} className="h-scroll-card">
-                        <div className="h-scroll-content">
-                            <div className="h-scroll-text">
-                                <h3>{item.title}</h3>
-                                <p>{item.description}</p>
-                            </div>
-                            <div className="h-scroll-visual">
-                                {item.content}
+        <section ref={targetRef} className="h-[300vh] relative">
+            <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+                <motion.div style={{ x }} className="flex gap-[4vw] px-[4vw]">
+                    {content.map((item, index) => (
+                        <div key={index} className="h-scroll-card-wrapper">
+                            <div className="h-scroll-card">
+                                <div className="h-scroll-content">
+                                    <div className="h-scroll-text">
+                                        <h3>{item.title}</h3>
+                                        <p>{item.description}</p>
+                                    </div>
+                                    <div className="h-scroll-visual">
+                                        {item.content}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </motion.div>
             </div>
-        </div>
+        </section>
     );
 };
+

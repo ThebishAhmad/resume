@@ -5,13 +5,15 @@ import "./styles/Landing.css";
 import TextPressure from './TextPressure';
 import RotatingText from './RotatingText';
 
+import { TextSplitter } from "./utils/TextSplitter";
+
 const Landing = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="landing-section" id="landingDiv">
         <div className="landing-container">
           <div className="landing-intro">
-            <h2>Hello! I'm</h2>
+            <TextSplitter text="Hello! I'm" className="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4" word={true} />
             <div style={{ position: 'relative', height: '300px', width: '100%' }}>
               <TextPressure
                 text="TABISH"
@@ -28,7 +30,7 @@ const Landing = ({ children }: PropsWithChildren) => {
             </div>
           </div>
           <div className="landing-info">
-            <h3 style={{ marginBottom: '0.5rem' }}>I am a Creative</h3>
+            <TextSplitter text="I am a Creative" className="text-xl sm:text-2xl text-gray-300 mb-2" word={true} delay={0.5} />
             <div style={{ display: 'flex', alignItems: 'center', height: '60px', overflow: 'hidden' }}>
               <RotatingText
                 texts={['DEVELOPER', 'DESIGNER', 'STUDENT', 'ENGINEER']}

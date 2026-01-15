@@ -1,25 +1,20 @@
 "use client";
 
 import { useEffect } from "react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
-import { gsap } from "gsap";
 import Lenis from "lenis";
 import "./styles/Navbar.css";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export const Navbar = () => {
   useEffect(() => {
     const lenis = new Lenis();
 
-    lenis.on("scroll", ScrollTrigger.update);
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
-    gsap.ticker.lagSmoothing(0);
+    requestAnimationFrame(raf);
 
     let links = document.querySelectorAll(".header a[data-href]");
     links.forEach((elem) => {
@@ -41,9 +36,6 @@ export const Navbar = () => {
     });
 
     return () => {
-      gsap.ticker.remove((time) => {
-        lenis.raf(time * 1000);
-      });
       lenis.destroy();
     };
   }, []);

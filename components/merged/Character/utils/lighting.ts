@@ -1,8 +1,6 @@
 import * as THREE from "three";
 import { RGBELoader } from "three-stdlib";
-import { gsap } from "gsap";
-
-
+import { animate } from "framer-motion";
 
 const setLighting = (scene: THREE.Scene) => {
   const directionalLight = new THREE.DirectionalLight(0xc7a9ff, 0);
@@ -36,25 +34,33 @@ const setLighting = (scene: THREE.Scene) => {
       pointLight.intensity = 0;
     }
   }
-  const duration = 2;
-  const ease = "power2.inOut";
+
   function turnOnLights() {
-    gsap.to(scene, {
-      environmentIntensity: 0.64,
-      duration: duration,
-      ease: ease,
-    });
-    gsap.to(directionalLight, {
-      intensity: 1,
-      duration: duration,
-      ease: ease,
-    });
-    gsap.to(".character-rim", {
-      y: "55%",
-      opacity: 1,
-      delay: 0.2,
+    animate(0, 0.64, {
       duration: 2,
+      ease: "easeInOut",
+      onUpdate: (latest) => {
+        scene.environmentIntensity = latest;
+      }
     });
+
+    animate(0, 1, {
+      duration: 2,
+      ease: "easeInOut",
+      onUpdate: (latest) => {
+        directionalLight.intensity = latest;
+      }
+    });
+
+    // animating DOM element .character-rim if it exists, or is it a 3D object? 
+    // The original code targeted ".character-rim" string. 
+    // This implies it's a DOM element overlaid on the canvas?
+    // GSAP can animate CSS selectors. Framer Motion's animate can too.
+
+    // Check if element exists to avoid errors
+    if (document.querySelector(".character-rim")) {
+      animate(".character-rim", { y: "55%", opacity: 1 }, { delay: 0.2, duration: 2 });
+    }
   }
 
   return { setPointLight, turnOnLights };

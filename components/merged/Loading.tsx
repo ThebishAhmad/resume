@@ -22,17 +22,15 @@ const Loading = ({ percent }: { percent: number }) => {
   }
 
   useEffect(() => {
-    import("./utils/initialFX").then((module) => {
-      if (isLoaded) {
-        setClicked(true);
-        setTimeout(() => {
-          if (module.initialFX) {
-            module.initialFX();
-          }
-          setIsLoading(false);
-        }, 900);
-      }
-    });
+    if (isLoaded) {
+      setClicked(true);
+      setTimeout(() => {
+        setIsLoading(false);
+        document.body.style.overflowY = "auto";
+        document.getElementsByTagName("main")[0]?.classList.add("main-active");
+      }, 900);
+    }
+
   }, [isLoaded]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
