@@ -2,50 +2,65 @@
 
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ScrollSmoother from "gsap/ScrollSmoother";
+// Remove static import
+// import ScrollSmoother from "gsap/ScrollSmoother";
 import HoverLinks from "./HoverLinks";
-import { gsap } from "gsap";
+import gsap from "gsap";
 import "./styles/Navbar.css";
 
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+// 🔥 REQUIRED: disables legacy trial warning in modern builds
+gsap.config({
+  trialWarn: false,
+} as any);
 
-
+gsap.registerPlugin(ScrollTrigger);
 
 // @ts-ignore
 export let smoother: any;
 
 const Navbar = () => {
   useEffect(() => {
-    smoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1.7,
-      speed: 1.7,
-      effects: true,
-      autoResize: true,
-      ignoreMobileResize: true,
-    });
+    (async () => {
+      try {
+        const ScrollSmoother = (await import("gsap/ScrollSmoother")).default;
+        gsap.registerPlugin(ScrollSmoother);
 
-    smoother.scrollTop(0);
-    // Smoother is not paused here to avoid lock-up issues; initialFX handles intro animations if needed.
+        smoother = ScrollSmoother.create({
+          wrapper: "#smooth-wrapper",
+          content: "#smooth-content",
+          smooth: 1.7,
+          speed: 1.7,
+          effects: true,
+          autoResize: true,
+          ignoreMobileResize: true,
+        });
 
-    let links = document.querySelectorAll(".header a[data-href]");
-    links.forEach((elem) => {
-      let element = elem as HTMLAnchorElement;
-      element.addEventListener("click", (e) => {
-        if (window.innerWidth > 1024) {
-          e.preventDefault();
-          let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
-          // Use "center center" to center the section in the viewport
-          smoother && smoother.scrollTo(section, true, "center center");
-        }
-      });
-    });
+        smoother.scrollTop(0);
+
+        // Refilling link listeners after smoother is ready
+        let links = document.querySelectorAll(".header a[data-href]");
+        links.forEach((elem) => {
+          let element = elem as HTMLAnchorElement;
+          element.addEventListener("click", (e) => {
+            if (window.innerWidth > 1024) {
+              e.preventDefault();
+              let elem = e.currentTarget as HTMLAnchorElement;
+              let section = elem.getAttribute("data-href");
+              smoother && smoother.scrollTo(section, true, "center center");
+            }
+          });
+        });
+
+      } catch (error) {
+        console.error("Failed to load ScrollSmoother:", error);
+      }
+    })();
 
     const resizeHandler = () => {
       // @ts-ignore
       if (typeof ScrollSmoother !== 'undefined') ScrollSmoother.refresh(true);
+      // Or better check smoother instance if ScrollSmoother class isn't global
+      if (smoother) smoother.refresh();
     };
     window.addEventListener("resize", resizeHandler);
 
