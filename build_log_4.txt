@@ -1,0 +1,29 @@
+
+> portfolio-clone@0.1.0 build
+> next build
+
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\hpp\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\hpp\Desktop\Goding\Portfolio\package-lock.json
+
+▲ Next.js 16.1.1 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 7.7s
+  Running TypeScript ...
+Failed to compile.
+
+./components/merged/Character/utils/lighting.ts:5:15
+Type error: Object literal may only specify known properties, and 'trialWarn' does not exist in type 'GSAPConfig'.
+
+[0m [90m 3 |[39m [36mimport[39m { gsap } [36mfrom[39m [32m"gsap"[39m[33m;[39m
+ [90m 4 |[39m
+[31m[1m>[22m[39m[90m 5 |[39m gsap[33m.[39mconfig({ trialWarn[33m:[39m [36mfalse[39m })[33m;[39m
+ [90m   |[39m               [31m[1m^[22m[39m
+ [90m 6 |[39m
+ [90m 7 |[39m [36mconst[39m setLighting [33m=[39m (scene[33m:[39m [33mTHREE[39m[33m.[39m[33mScene[39m) [33m=>[39m {
+ [90m 8 |[39m   [36mconst[39m directionalLight [33m=[39m [36mnew[39m [33mTHREE[39m[33m.[39m[33mDirectionalLight[39m([35m0xc7a9ff[39m[33m,[39m [35m0[39m)[33m;[39m[0m
+Next.js build worker exited with code: 1 and signal: null

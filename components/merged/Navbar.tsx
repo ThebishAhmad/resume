@@ -7,9 +7,9 @@ import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import "./styles/Navbar.css";
 
-gsap.config({ trialWarn: false });
-
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+
+
 
 // @ts-ignore
 export let smoother: any;

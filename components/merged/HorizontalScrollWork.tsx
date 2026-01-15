@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./styles/HorizontalWork.css";
 
-gsap.config({ trialWarn: false });
+
 
 gsap.registerPlugin(ScrollTrigger);
 
