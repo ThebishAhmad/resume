@@ -11,6 +11,9 @@
   "overrides": {
     "gsap-trial": "npm:gsap@^3.14.2"
   },
+  "resolutions": {
+    "gsap-trial": "npm:gsap@^3.14.2"
+  },
   "dependencies": {
     "@react-three/cannon": "^6.6.0",
     "@react-three/drei": "^10.7.7",
