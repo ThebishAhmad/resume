@@ -2,32 +2,24 @@
 
 import { useEffect } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ScrollSmoother from "gsap/ScrollSmoother";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
+import Lenis from "lenis";
 import "./styles/Navbar.css";
 
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
-
-
-// @ts-ignore
-export let smoother: any;
-
-const Navbar = () => {
+export const Navbar = () => {
   useEffect(() => {
-    smoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1.7,
-      speed: 1.7,
-      effects: true,
-      autoResize: true,
-      ignoreMobileResize: true,
+    const lenis = new Lenis();
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
     });
 
-    smoother.scrollTop(0);
-    // Smoother is not paused here to avoid lock-up issues; initialFX handles intro animations if needed.
+    gsap.ticker.lagSmoothing(0);
 
     let links = document.querySelectorAll(".header a[data-href]");
     links.forEach((elem) => {
@@ -37,21 +29,22 @@ const Navbar = () => {
           e.preventDefault();
           let elem = e.currentTarget as HTMLAnchorElement;
           let section = elem.getAttribute("data-href");
-          // Use "center center" to center the section in the viewport
-          smoother && smoother.scrollTo(section, true, "center center");
+
+          if (section) {
+            const target = document.querySelector(section) as HTMLElement;
+            if (target) {
+              lenis.scrollTo(target);
+            }
+          }
         }
       });
     });
 
-    const resizeHandler = () => {
-      // @ts-ignore
-      if (typeof ScrollSmoother !== 'undefined') ScrollSmoother.refresh(true);
-    };
-    window.addEventListener("resize", resizeHandler);
-
     return () => {
-      window.removeEventListener("resize", resizeHandler);
-      if (smoother) smoother.kill();
+      gsap.ticker.remove((time) => {
+        lenis.raf(time * 1000);
+      });
+      lenis.destroy();
     };
   }, []);
   return (
