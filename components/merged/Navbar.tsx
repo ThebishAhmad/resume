@@ -23,7 +23,7 @@ const Navbar = () => {
     (async () => {
       try {
         // @ts-ignore
-        const ScrollSmoother = (await import("../../vendor/ScrollSmoother")).default;
+        const ScrollSmoother = (await import("gsap/ScrollSmoother")).default;
         gsap.registerPlugin(ScrollSmoother);
 
         smoother = ScrollSmoother.create({

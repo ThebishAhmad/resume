@@ -9,10 +9,10 @@
     "lint": "eslint"
   },
   "overrides": {
-    "gsap-trial": "npm:gsap@^3.14.2"
+    "gsap-trial": "npm:gsap@3.12.5"
   },
   "resolutions": {
-    "gsap-trial": "npm:gsap@^3.14.2"
+    "gsap-trial": "npm:gsap@3.12.5"
   },
   "dependencies": {
     "@react-three/cannon": "^6.6.0",
@@ -23,7 +23,7 @@
     "@types/three": "^0.182.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.26",
-    "gsap": "^3.14.2",
+    "gsap": "3.12.5",
     "lenis": "^1.3.17",
     "lucide-react": "^0.562.0",
     "motion": "^12.24.12",
