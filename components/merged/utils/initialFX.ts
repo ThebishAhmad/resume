@@ -2,6 +2,8 @@ import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { smoother } from "../Navbar";
 
+gsap.config({ trialWarn: false });
+
 gsap.registerPlugin(SplitText);
 
 export function initialFX() {
