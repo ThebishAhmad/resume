@@ -15,32 +15,13 @@ gsap.config({
 
 gsap.registerPlugin(ScrollTrigger);
 
-// @ts-ignore
-export let smoother: any;
+
 
 const Navbar = () => {
   useEffect(() => {
     (async () => {
       try {
-        // ScrollSmoother is not available in free gsap@3.12.5 package
-        // const ScrollSmoother = (await import("gsap/ScrollSmoother")).default;
-        // gsap.registerPlugin(ScrollSmoother);
-
-        /* 
-        smoother = ScrollSmoother.create({
-          wrapper: "#smooth-wrapper",
-          content: "#smooth-content",
-          smooth: 1.7,
-          speed: 1.7,
-          effects: true,
-          autoResize: true,
-          ignoreMobileResize: true,
-        });
-        */
-
-        // smoother.scrollTop(0);
-
-        // Refilling link listeners after smoother is ready
+        // Refilling link listeners 
         let links = document.querySelectorAll(".header a[data-href]");
         links.forEach((elem) => {
           let element = elem as HTMLAnchorElement;
@@ -48,28 +29,24 @@ const Navbar = () => {
             if (window.innerWidth > 1024) {
               e.preventDefault();
               let elem = e.currentTarget as HTMLAnchorElement;
-              let section = elem.getAttribute("data-href");
-              // smoother && smoother.scrollTo(section, true, "center center");
+              let sectionId = elem.getAttribute("data-href");
+              if (sectionId) {
+                const targetSection = document.querySelector(sectionId);
+                if (targetSection) {
+                  targetSection.scrollIntoView({ behavior: "smooth", block: "center" });
+                }
+              }
             }
           });
         });
 
       } catch (error) {
-        console.error("Failed to load ScrollSmoother:", error);
+        console.error("Failed to initialize navbar links:", error);
       }
     })();
 
-    const resizeHandler = () => {
-      // @ts-ignore
-      if (typeof ScrollSmoother !== 'undefined') ScrollSmoother.refresh(true);
-      // Or better check smoother instance if ScrollSmoother class isn't global
-      if (smoother) smoother.refresh();
-    };
-    window.addEventListener("resize", resizeHandler);
-
     return () => {
-      window.removeEventListener("resize", resizeHandler);
-      if (smoother) smoother.kill();
+      // Cleanup if needed
     };
   }, []);
   return (
