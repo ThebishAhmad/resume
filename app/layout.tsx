@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tabish Portfolio Clone",
+  title: "Tabish Portfolio",
   description: "Front-end developer portfolio",
   icons: {
     icon: "/favicon.svg",
