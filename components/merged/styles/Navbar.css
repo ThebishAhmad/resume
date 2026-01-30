@@ -85,14 +85,58 @@
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
-@media only screen and (min-width: 500px) {
+/* Mobile - Very Small Screens - MINIMAL NAVBAR */
+@media only screen and (max-width: 768px) {
+  .header {
+    padding: 8px 16px;
+    gap: 12px;
+    top: 10px;
+    max-width: 90%;
+  }
 
-  /* Adjusted for new design, allowing scale but keeping pill shape */
+  /* HIDE ALL NAVIGATION LINKS ON MOBILE */
+  .header ul {
+    display: none;
+  }
+
+  .navbar-connect {
+    font-size: 11px;
+    padding: 6px 14px;
+    letter-spacing: 0.3px;
+  }
+
+  .logo-svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Tablet - Show minimal links */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+  .header {
+    padding: 10px 20px;
+    gap: 20px;
+  }
+
+  .header ul {
+    font-size: 13px;
+    column-gap: 15px;
+  }
+
+  /* Hide less important links on tablet */
+  .header ul li:nth-child(n+5) {
+    display: none;
+  }
+}
+
+/* Desktop - Show all */
+@media only screen and (min-width: 1025px) {
   .header ul {
     font-size: 15px;
   }
 }
 
+/* Large Desktop */
 @media only screen and (min-width: 1200px) {
   .header ul {
     column-gap: 50px;

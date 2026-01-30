@@ -107,3 +107,46 @@
     --white: #ffffff;
     --slate-500: #64748b;
 }
+
+/* Mobile Breakpoints */
+@media (max-width: 480px) {
+    .sticky-scroll-container {
+        height: 20rem;
+        padding: 1.5rem;
+        border-radius: 1rem;
+    }
+
+    .sticky-scroll-content {
+        padding-right: 0;
+        width: 100%;
+    }
+
+    .sticky-scroll-card {
+        margin-bottom: 3rem;
+        margin-top: 3rem;
+    }
+
+    .sticky-scroll-title {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .sticky-scroll-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .sticky-scroll-container {
+        height: 25rem;
+        padding: 2rem;
+    }
+
+    .sticky-scroll-title {
+        font-size: 2rem;
+    }
+
+    .sticky-scroll-description {
+        font-size: 1.1rem;
+    }
+}

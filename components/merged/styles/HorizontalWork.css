@@ -87,21 +87,49 @@
     transform: scale(1.05);
 }
 
-/* Mobile Responsiveness */
+/* Mobile Responsiveness - Native Horizontal Scroll */
 @media (max-width: 1024px) {
+    .h-scroll-outer {
+        height: 100vh;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .h-scroll-inner {
+        flex-direction: row;
+        gap: 30px;
+        padding-left: 20px;
+        padding-right: 20px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        height: 100%;
+        align-items: center;
+    }
+
+    .h-scroll-inner::-webkit-scrollbar {
+        display: none;
+    }
+
     .h-scroll-card {
+        flex-shrink: 0;
         width: 85vw;
-        height: 60vh;
+        height: auto;
+        min-height: 500px;
+        max-height: 80vh;
         flex-direction: column;
+        scroll-snap-align: center;
     }
 
     .h-scroll-content {
         flex-direction: column-reverse;
-        /* Image top, text bottom usually, or visual top */
     }
 
     .h-scroll-visual {
         flex: 1;
+        min-height: 250px;
         height: 50%;
     }
 
@@ -117,5 +145,37 @@
 
     .h-scroll-text p {
         font-size: 0.95rem;
+    }
+}
+
+/* Very Small Mobile */
+@media (max-width: 480px) {
+    .h-scroll-inner {
+        gap: 20px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .h-scroll-card {
+        width: 90vw;
+        min-height: 450px;
+    }
+
+    .h-scroll-text {
+        padding: 20px;
+    }
+
+    .h-scroll-text h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .h-scroll-text p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    .h-scroll-visual {
+        min-height: 200px;
     }
 }

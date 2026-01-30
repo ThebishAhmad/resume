@@ -24,17 +24,17 @@ export const HorizontalScrollWork = ({ content }: { content: WorkItem[] }) => {
 
         if (!section || !trigger) return;
 
-        // Calculate total width of all cards plus gaps
-        // We can assume each card is e.g., 80vw or fixed width.
-        // Let's rely on scrollWidth for dynamic sizing.
+        // Check if device is mobile (screen width less than 1024px)
+        const isMobile = window.innerWidth < 1024;
+
+        // Only enable horizontal scroll on desktop
+        if (isMobile) return;
 
         let ctx = gsap.context(() => {
             gsap.to(section, {
                 x: () => {
                     const scrollWidth = section.scrollWidth;
                     const windowWidth = window.innerWidth;
-                    // Increase buffer significantly to ensure last card is fully visible
-                    // Make it responsive: ensure we scroll enough to show the end plus some padding
                     return -(scrollWidth - windowWidth + 500);
                 },
                 ease: "none",
@@ -42,7 +42,6 @@ export const HorizontalScrollWork = ({ content }: { content: WorkItem[] }) => {
                     trigger: trigger,
                     pin: true,
                     scrub: 1,
-                    // Adjust end based on scroll width for natural feel
                     end: () => "+=" + (section.scrollWidth),
                     invalidateOnRefresh: true,
                 }

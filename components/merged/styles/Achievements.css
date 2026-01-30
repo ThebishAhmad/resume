@@ -72,6 +72,7 @@
     font-size: 4rem;
     line-height: 1;
     background: linear-gradient(135deg, #fff 0%, #888 100%);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -105,6 +106,43 @@
     color: #ccc;
     line-height: 1.6;
     margin-top: 10px;
+}
+
+@media (max-width: 480px) {
+    .achievements-section {
+        padding-top: 50px;
+    }
+
+    .achievements-title {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .scroll-stack-container {
+        height: 60vh;
+        border-radius: 20px;
+    }
+
+    .card-content {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .card-icon {
+        font-size: 2.5rem;
+    }
+
+    .card-text h3 {
+        font-size: 1.3rem;
+    }
+
+    .card-highlight {
+        font-size: 1rem;
+    }
+
+    .card-desc {
+        font-size: 0.95rem;
+    }
 }
 
 @media (max-width: 768px) {
