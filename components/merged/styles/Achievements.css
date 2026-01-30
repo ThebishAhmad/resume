@@ -29,7 +29,7 @@
 
 .scroll-stack-container {
     width: 100%;
-    height: 80vh;
+    height: 55vh;
     /* Viewport for the scroll area */
     max-width: 1000px;
 
@@ -119,7 +119,7 @@
     }
 
     .scroll-stack-container {
-        height: 60vh;
+        height: 45vh;
         border-radius: 20px;
     }
 
