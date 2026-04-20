@@ -287,6 +287,35 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             card.style.webkitPerspective = '1000px';
         });
 
+        const handleWheel = (e: WheelEvent) => {
+            const isAtTop = scroller.scrollTop <= 0;
+            const isAtBottom = Math.abs(scroller.scrollHeight - scroller.clientHeight - scroller.scrollTop) <= 2;
+            
+            if ((isAtTop && e.deltaY < 0) || (isAtBottom && e.deltaY > 0)) {
+                e.stopImmediatePropagation();
+            }
+        };
+
+        let startY = 0;
+        const handleTouchStart = (e: TouchEvent) => {
+            startY = e.touches[0].clientY;
+        };
+        const handleTouchMove = (e: TouchEvent) => {
+            const isAtTop = scroller.scrollTop <= 0;
+            const isAtBottom = Math.abs(scroller.scrollHeight - scroller.clientHeight - scroller.scrollTop) <= 2;
+            const deltaY = startY - e.touches[0].clientY;
+            
+            if ((isAtTop && deltaY < 0) || (isAtBottom && deltaY > 0)) {
+                e.stopImmediatePropagation();
+            }
+        };
+
+        if (!useWindowScroll) {
+            scroller.addEventListener('wheel', handleWheel, { passive: false });
+            scroller.addEventListener('touchstart', handleTouchStart, { passive: true });
+            scroller.addEventListener('touchmove', handleTouchMove, { passive: false });
+        }
+
         setupLenis();
 
         updateCardTransforms();
@@ -297,6 +326,11 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             }
             if (lenisRef.current) {
                 lenisRef.current.destroy();
+            }
+            if (!useWindowScroll) {
+                scroller.removeEventListener('wheel', handleWheel);
+                scroller.removeEventListener('touchstart', handleTouchStart);
+                scroller.removeEventListener('touchmove', handleTouchMove);
             }
             stackCompletedRef.current = false;
             cardsRef.current = [];

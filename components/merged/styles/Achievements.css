@@ -119,7 +119,8 @@
     }
 
     .scroll-stack-container {
-        height: 45vh;
+        height: 95vh;
+        min-height: 650px;
         border-radius: 20px;
     }
 

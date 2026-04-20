@@ -55,8 +55,8 @@
 
 @media (max-width: 768px) {
   .about-section {
-    padding: 0;
-    margin-top: 50vh;
+    padding: 50px 0;
+    margin-top: 0;
     z-index: 100;
     min-height: auto;
   }
@@ -106,8 +106,8 @@
 /* Very small mobile */
 @media (max-width: 480px) {
   .about-section {
-    padding: 0;
-    margin-top: 40vh;
+    padding: 40px 0;
+    margin-top: 0;
   }
 
   .about-me {
